@@ -1,9 +1,9 @@
-import ReactDOM from 'react-dom/client'
+import ReactDOM from 'react-dom/client';
 // import App from './App.tsx'
-import { ChakraProvider, } from '@chakra-ui/react'
-import './index.css'
-import StartupPage from './pages/startup.tsx'
-import theme from './theme/index.ts'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import './index.css';
+import {StartupPage} from './pages/startup.tsx';
+import { theme } from './theme/index.ts';
 
 // const config: ThemeConfig = {
 //   useSystemColorMode: false,
@@ -14,7 +14,7 @@ import theme from './theme/index.ts'
 // const customTheme = extendTheme({ config })
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <ChakraProvider theme={theme}>
-    <StartupPage />
-  </ChakraProvider>
-)
+	<ChakraProvider theme={extendTheme({ theme })}>
+		<StartupPage />
+	</ChakraProvider>
+);

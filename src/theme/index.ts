@@ -1,4 +1,3 @@
-import { extendTheme } from '@chakra-ui/react'
 import foundations from './foundations'
 
 const direction = 'ltr'
@@ -14,5 +13,3 @@ export const theme = {
   ...foundations,
   config,
 }
-
-export default extendTheme(theme)
