@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import { ChakraProvider, ThemeConfig, extendTheme } from '@chakra-ui/react'
+// import App from './App.tsx'
+import { ChakraProvider, } from '@chakra-ui/react'
 import './index.css'
 import StartupPage from './pages/startup.tsx'
 import theme from './theme/index.ts'
