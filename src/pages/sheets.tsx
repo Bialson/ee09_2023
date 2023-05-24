@@ -40,7 +40,7 @@ interface LinkItemProps {
 	setOpen?: () => void;
 }
 const LinkItems: Array<LinkItemProps> = [
-	{ name: 'Home', icon: BsHouse, url: '/' },
+	{ name: 'Home', icon: BsHouse, url: '/ee09_inf03/' },
 	{ name: 'Sheets', icon: BsCompass },
 	// { name: 'Favourites', icon: BsStar },
 	{ name: 'About', icon: BsInfoCircle },
@@ -220,7 +220,7 @@ const NavItem = ({ icon, children, name, url, ...rest}: NavItemProps) => {
 	const { setInfoOpen } = useContext(InfoModalContext);
 	return (
 		<Link
-			href={url != undefined ? url : '#'}
+			href={url != undefined ? url : undefined}
 			style={{ textDecoration: 'none' }}
 			_focus={{ boxShadow: 'none' }}
 			onClick={name === 'About' ? () => setInfoOpen(true) : undefined}

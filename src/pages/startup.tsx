@@ -70,7 +70,7 @@ export const StartupPage = () => {
 							zIndex={1}
 							// position={'relative'}
 						>
-							<Link href="/#/sheets">
+							<Link href="/ee09_inf03/#/sheets">
 								<Button
 									rounded={'full'}
 									size={'lg'}
