@@ -40,7 +40,7 @@ interface LinkItemProps {
 	setOpen?: () => void;
 }
 const LinkItems: Array<LinkItemProps> = [
-	{ name: 'Home', icon: BsHouse, url: '/ee09_inf03' },
+	{ name: 'Home', icon: BsHouse, url: '/ee09_inf03/' },
 	{ name: 'Sheets', icon: BsCompass },
 	// { name: 'Favourites', icon: BsStar },
 	{ name: 'About', icon: BsInfoCircle },

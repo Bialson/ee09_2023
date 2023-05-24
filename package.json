@@ -2,7 +2,7 @@
   "name": "ee09_2023",
   "private": true,
   "version": "0.1.0",
-  "homepage": "https://bialson.github.io/ee09_2023",
+  "homepage": ".",
   "type": "module",
   "scripts": {
     "deploy": "yarn build && git subtree push --prefix dist origin gh-pages",
