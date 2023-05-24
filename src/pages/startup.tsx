@@ -12,6 +12,7 @@ import {
 	createIcon,
 	IconProps,
 	useColorModeValue,
+	Link,
 } from '@chakra-ui/react';
 import { BsSun, BsMoonStarsFill, BsGithub } from 'react-icons/bs';
 
@@ -60,35 +61,46 @@ export const StartupPage = () => {
 							</Text>
 						</Heading>
 						<Text color={'gray.500'}>
-							A growing collection of fully completed vocational exams sheets with step-by-step instructions from student for studens. 
+							A growing collection of fully completed vocational
+							exams sheets with step-by-step instructions from
+							student for studens.
 						</Text>
 						<Stack
 							spacing={{ base: 4, sm: 6 }}
 							direction={{ base: 'column', sm: 'row' }}
 							zIndex={1}
+							// position={'relative'}
 						>
-							<Button
-								rounded={'full'}
-								size={'lg'}
-								fontWeight={'normal'}
-								px={6}
-								colorScheme={'red'}
-								bg={'red.400'}
-								_hover={{ bg: 'red.500', color: 'white' }}
-							>
-								Get started
-							</Button>
-							<Button
-								rounded={'full'}
-								size={'lg'}
-								fontWeight={'normal'}
-								px={6}
-								leftIcon={
-									<BsGithub h={4} w={4} color={'gray.300'} />
-								}
-							>
-								Check GitHub
-							</Button>
+							<Link href="">
+								<Button
+									rounded={'full'}
+									size={'lg'}
+									fontWeight={'normal'}
+									px={6}
+									colorScheme={'red'}
+									bg={'red.400'}
+									_hover={{ bg: 'red.500', color: 'white' }}
+								>
+									Get started
+								</Button>
+							</Link>
+							<Link href="https://github.com/Bialson/ee09_inf03">
+								<Button
+									rounded={'full'}
+									size={'lg'}
+									fontWeight={'normal'}
+									px={6}
+									leftIcon={
+										<BsGithub
+											h={4}
+											w={4}
+											color={'gray.300'}
+										/>
+									}
+								>
+									Check GitHub
+								</Button>
+							</Link>
 							<Button
 								aria-label="Toggle Color Mode"
 								onClick={toggleColorMode}
@@ -96,8 +108,17 @@ export const StartupPage = () => {
 								rounded={'full'}
 								size={'lg'}
 								fontWeight={'normal'}
-								px={6}>
-								{colorMode === 'light' ? <BsMoonStarsFill /> : <BsSun />}
+								px={6}
+								position={{ base: 'absolute', sm: 'relative' }}
+								left={{ base: '40%', sm: '0' }}
+								right={{ base: '40%', sm: '0' }}
+								bottom={{ base: '2%', sm: '0' }}
+							>
+								{colorMode === 'light' ? (
+									<BsMoonStarsFill />
+								) : (
+									<BsSun />
+								)}
 							</Button>
 						</Stack>
 					</Stack>
@@ -153,7 +174,7 @@ export const StartupPage = () => {
 			</Container>
 		</Flex>
 	);
-}
+};
 
 const PlayIcon = createIcon({
 	displayName: 'PlayIcon',

@@ -1,20 +1,32 @@
 import ReactDOM from 'react-dom/client';
 // import App from './App.tsx'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { StartupPage } from './pages/startup.tsx';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { ErrorPage } from './pages/error_page.tsx';
 import './index.css';
-import {StartupPage} from './pages/startup.tsx';
 import { theme } from './theme/index.ts';
+import { Sheets } from './pages/sheets.tsx';
 
-// const config: ThemeConfig = {
-//   useSystemColorMode: false,
-//   initialColorMode: "dark",
-// }
-
-// // 3. extend the theme
-// const customTheme = extendTheme({ config })
+const router = createBrowserRouter([
+	{
+		path: '/',
+		errorElement: <ErrorPage />,
+	},
+	{
+		path: '/ee09_inf03',
+		element: <StartupPage />,
+		errorElement: <ErrorPage />,
+	},
+	{
+		path: '/ee09_inf03/sheets',
+		element: <Sheets />,
+		errorElement: <ErrorPage />,
+	},
+]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<ChakraProvider theme={extendTheme({ theme })}>
-		<StartupPage />
+		<RouterProvider router={router} />
 	</ChakraProvider>
 );
