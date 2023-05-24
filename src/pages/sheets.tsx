@@ -32,6 +32,9 @@ import {
 } from 'react-icons/bs';
 import { IconType } from 'react-icons';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
+import React from '../assets/react.svg'
+import TS from '../assets/Typescript_logo_2020.svg';
+import Logo from '../assets/exam-svgrepo-com.svg';
 
 interface LinkItemProps {
 	name: string;
@@ -136,7 +139,7 @@ export const About = () => {
 					<Flex justifyContent={'space-evenly'}>
 						<Flex alignItems={'center'} flexDir={'column'}>
 							<Image
-								src="/src/assets/react.svg"
+								src={React}
 								alt="React"
 								width={50}
 							/>
@@ -150,7 +153,7 @@ export const About = () => {
 						</Flex>
 						<Flex alignItems={'center'} flexDir={'column'}>
 							<Image
-								src="/src/assets/Typescript_logo_2020.svg"
+								src={TS}
 								alt="TypeScript"
 								width={50}
 							/>
@@ -189,7 +192,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 		>
 			<Flex h="20" alignItems="center" mx="8" gap={10}>
 				<Image
-					src="/src/assets/exam-svgrepo-com.svg"
+					src={Logo}
 					alt="Logo"
 					width={50}
 				/>
@@ -273,7 +276,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 			{...rest}
 		>
 			<Image
-				src="/src/assets/exam-svgrepo-com.svg"
+				src={Logo}
 				alt="Logo"
 				width={50}
 			/>
