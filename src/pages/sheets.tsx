@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import {
 	IconButton,
 	Box,
@@ -22,15 +22,13 @@ import {
 	ModalContent,
 	ModalHeader,
 	ModalOverlay,
-	Spacer,
 } from '@chakra-ui/react';
 import {
 	BsHouse,
 	BsGear,
 	BsCompass,
-	BsStar,
-	BsList,
 	BsInfoCircle,
+	BsList,
 } from 'react-icons/bs';
 import { IconType } from 'react-icons';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
@@ -56,10 +54,10 @@ type IInfoContext = {
 
 const InfoModalContext = createContext<IInfoContext>({
 	isInfoOpen: false,
-	setInfoOpen: (isOpen) => {},
+	setInfoOpen: () => {},
 });
 
-export const Sheets = ({ children }: { children?: ReactNode }) => {
+export const Sheets = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [isInfoOpen, setInfoOpen] = useState<boolean>(false);
 	return (
