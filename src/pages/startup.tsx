@@ -13,6 +13,7 @@ import {
 	useColorModeValue,
 	Link,
 } from '@chakra-ui/react';
+import { useLayoutEffect } from 'react';
 import { BsSun, BsMoonStarsFill, BsGithub } from 'react-icons/bs';
 
 export const StartupPage = () => {

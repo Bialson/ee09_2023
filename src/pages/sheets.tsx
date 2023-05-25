@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import {
 	IconButton,
 	Box,
@@ -22,19 +22,25 @@ import {
 	ModalContent,
 	ModalHeader,
 	ModalOverlay,
+	useColorMode,
 } from '@chakra-ui/react';
 import {
 	BsHouse,
-	BsGear,
+	// BsGear,
 	BsCompass,
 	BsInfoCircle,
 	BsList,
+	BsMoonStarsFill,
+	BsSun,
 } from 'react-icons/bs';
 import { IconType } from 'react-icons';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
-import React from '../assets/react.svg'
+import React from '../assets/react.svg';
 import TS from '../assets/Typescript_logo_2020.svg';
 import Logo from '../assets/exam-svgrepo-com.svg';
+import { InfoModalProvider } from '../context/InfoModalProvider';
+import { InfoModalContext } from '../context/InfoModalContext';
+import { SheetsGallery } from '../components/SheetsGallery';
 
 interface LinkItemProps {
 	name: string;
@@ -47,49 +53,60 @@ const LinkItems: Array<LinkItemProps> = [
 	{ name: 'Sheets', icon: BsCompass },
 	// { name: 'Favourites', icon: BsStar },
 	{ name: 'About', icon: BsInfoCircle },
-	{ name: 'Settings', icon: BsGear },
+	// { name: 'Settings', icon: BsGear },
 ];
 
-type IInfoContext = {
-	isInfoOpen: boolean;
-	setInfoOpen: (isOpen: boolean) => void;
+export const Sheets = () => {
+	const { colorMode, toggleColorMode } = useColorMode();
+	return (
+		<InfoModalProvider>
+			<Flex height={'100vh'} width={'100vw'}>
+				<Navbar />
+				<SheetsGallery />
+				<About />
+				<Button
+					aria-label="Toggle Color Mode"
+					onClick={toggleColorMode}
+					_focus={{ boxShadow: 'none' }}
+					rounded={'full'}
+					position={'absolute'}
+					bottom={4}
+					right={4}
+					padding={4}
+					fontSize={20}
+					width={'fit-content'}
+					height={'fit-content'}
+				>
+					{colorMode === 'light' ? <BsMoonStarsFill /> : <BsSun />}
+				</Button>
+			</Flex>
+		</InfoModalProvider>
+	);
 };
 
-const InfoModalContext = createContext<IInfoContext>({
-	isInfoOpen: false,
-	setInfoOpen: () => {},
-});
-
-export const Sheets = () => {
+const Navbar = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const [isInfoOpen, setInfoOpen] = useState<boolean>(false);
 	return (
-		<InfoModalContext.Provider value={{ isInfoOpen, setInfoOpen }}>
-			<Flex minH={'100vh'} width={'100vw'}>
-				<SidebarContent
-					onClose={() => onClose}
-					display={{ base: 'none', md: 'block' }}
-				/>
-				<Drawer
-					autoFocus={false}
-					isOpen={isOpen}
-					placement="left"
-					onClose={onClose}
-					returnFocusOnClose={false}
-					onOverlayClick={onClose}
-					size="full"
-				>
-					<DrawerContent>
-						<SidebarContent onClose={onClose} />
-					</DrawerContent>
-				</Drawer>
-				<MobileNav
-					display={{ base: 'flex', md: 'none' }}
-					onOpen={onOpen}
-				/>
-				<About />
-			</Flex>
-		</InfoModalContext.Provider>
+		<>
+			<SidebarContent
+				onClose={() => onClose}
+				display={{ base: 'none', md: 'block' }}
+			/>
+			<Drawer
+				autoFocus={false}
+				isOpen={isOpen}
+				placement="left"
+				onClose={onClose}
+				returnFocusOnClose={false}
+				onOverlayClick={onClose}
+				size="full"
+			>
+				<DrawerContent>
+					<SidebarContent onClose={onClose} />
+				</DrawerContent>
+			</Drawer>
+			<MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
+		</>
 	);
 };
 
@@ -138,11 +155,7 @@ export const About = () => {
 					</Text>
 					<Flex justifyContent={'space-evenly'}>
 						<Flex alignItems={'center'} flexDir={'column'}>
-							<Image
-								src={React}
-								alt="React"
-								width={50}
-							/>
+							<Image src={React} alt="React" width={50} />
 							<Text
 								marginTop={2}
 								color={'purple.400'}
@@ -152,11 +165,7 @@ export const About = () => {
 							</Text>
 						</Flex>
 						<Flex alignItems={'center'} flexDir={'column'}>
-							<Image
-								src={TS}
-								alt="TypeScript"
-								width={50}
-							/>
+							<Image src={TS} alt="TypeScript" width={50} />
 							<Text
 								marginTop={2}
 								color={'purple.400'}
@@ -186,16 +195,12 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 			borderRight="1px"
 			borderRightColor={useColorModeValue('gray.200', 'gray.700')}
 			w={{ base: 'full', md: 80 }}
-			pos="fixed"
+			pos={{md: "relative", base: "fixed"}}
 			h="full"
 			{...rest}
 		>
 			<Flex h="20" alignItems="center" mx="8" gap={10}>
-				<Image
-					src={Logo}
-					alt="Logo"
-					width={50}
-				/>
+				<Image src={Logo} alt="Logo" width={50} />
 				<Text fontSize="2xl" fontFamily="sans-serif" fontWeight="600">
 					ExamSheets
 				</Text>
@@ -205,7 +210,12 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 				/>
 			</Flex>
 			{LinkItems.map((link) => (
-				<NavItem key={link.name} icon={link.icon} name={link.name} url={link.url}>
+				<NavItem
+					key={link.name}
+					icon={link.icon}
+					name={link.name}
+					url={link.url}
+				>
 					{link.name}
 				</NavItem>
 			))}
@@ -215,11 +225,11 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 
 interface NavItemProps extends FlexProps {
 	icon: IconType;
-	children: any;
+	children: JSX.Element | string;
 	name: string;
 	url: string | undefined;
 }
-const NavItem = ({ icon, children, name, url, ...rest}: NavItemProps) => {
+const NavItem = ({ icon, children, name, url, ...rest }: NavItemProps) => {
 	const { setInfoOpen } = useContext(InfoModalContext);
 	return (
 		<Link
@@ -275,11 +285,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 			w={'100vw'}
 			{...rest}
 		>
-			<Image
-				src={Logo}
-				alt="Logo"
-				width={50}
-			/>
+			<Image src={Logo} alt="Logo" width={50} />
 			<Text
 				fontSize="2xl"
 				ml="8"
