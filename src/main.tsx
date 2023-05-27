@@ -8,6 +8,13 @@ import './index.css';
 import { theme } from './theme/index.ts';
 import { Sheets } from './pages/sheets.tsx';
 
+import { pdfjs } from 'react-pdf';
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url,
+).toString();
+
 const router = createHashRouter([
 	{
 		path: '/*',

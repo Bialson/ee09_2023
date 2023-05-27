@@ -71,7 +71,7 @@ export const Sheets = () => {
 					rounded={'full'}
 					position={'absolute'}
 					bottom={4}
-					right={4}
+					left={4}
 					padding={4}
 					fontSize={20}
 					width={'fit-content'}
@@ -199,7 +199,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 			h="full"
 			{...rest}
 		>
-			<Flex h="20" alignItems="center" mx="8" gap={10}>
+			<Flex h="20" alignItems="center" justifyContent={'center'} mx="8" gap={10}>
 				<Image src={Logo} alt="Logo" width={50} />
 				<Text fontSize="2xl" fontFamily="sans-serif" fontWeight="600">
 					ExamSheets
