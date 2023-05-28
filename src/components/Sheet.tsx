@@ -11,7 +11,7 @@ export const Sheet = () => {
 		'/src/markdown/EE09_2023.md'
 	);
 	return (
-		<Box width={'45%'}>
+		<Box width={'50%'} overflowY={'scroll'}>
 			<ReactMarkdown
 				children={markdown?.data}
 				components={ChakraUIRenderer({

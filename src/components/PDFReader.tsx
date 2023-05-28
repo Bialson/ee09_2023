@@ -14,33 +14,45 @@ import { Box } from '@chakra-ui/react';
 // ).toString();
 
 const options = {
-  cMapUrl: 'cmaps/',
-  standardFontDataUrl: 'standard_fonts/',
+	cMapUrl: 'cmaps/',
+	standardFontDataUrl: 'standard_fonts/',
 };
 
 type PDFFile = string | File | null;
 
 export function PDFReader() {
-  const [file, setFile] = useState<PDFFile>('../assets/ee09_2023.pdf');
-  const [numPages, setNumPages] = useState<number>();
+	const [file, setFile] = useState<PDFFile>('../assets/ee09_2023.pdf');
+	const [numPages, setNumPages] = useState<number>();
 
-  function onFileChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const { files } = event.target;
+	function onFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+		const { files } = event.target;
 
-    if (files && files[0]) {
-      setFile(files[0] || null);
-    }
-  }
+		if (files && files[0]) {
+			setFile(files[0] || null);
+		}
+	}
 
-  function onDocumentLoadSuccess({ numPages: nextNumPages }: PDFDocumentProxy) {
-    setNumPages(nextNumPages);
-  }
+	function onDocumentLoadSuccess({
+		numPages: nextNumPages,
+	}: PDFDocumentProxy) {
+		setNumPages(nextNumPages);
+	}
 
-  return (
-    <Box overflow={'scroll'}><Document file={File} onLoadSuccess={onDocumentLoadSuccess} options={options}>
-    {Array.from(new Array(numPages), (el, index) => (
-      <Page key={`page_${index + 1}`} pageNumber={index + 1} scale={1.2}/>
-    ))}
-  </Document></Box>
-  );
+	return (
+		<Box overflow={'scroll'}>
+			<Document
+				file={File}
+				onLoadSuccess={onDocumentLoadSuccess}
+				options={options}
+			>
+				{Array.from(new Array(numPages), (el, index) => (
+					<Page
+						key={`page_${index + 1}`}
+						pageNumber={index + 1}
+						scale={1.2}
+					/>
+				))}
+			</Document>
+		</Box>
+	);
 }
