@@ -5,4 +5,5 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: "/ee09_inf03/",
   plugins: [react()],
+  assetsInclude: ['**/*.md', '**/*.pdf']
 })

@@ -7,5 +7,5 @@ interface IInfoContext {
 
 export const InfoModalContext = createContext<IInfoContext>({
 	isInfoOpen: false,
-    setInfoOpen: (isOpen: boolean) => {}
+    setInfoOpen: () => {}
 });
